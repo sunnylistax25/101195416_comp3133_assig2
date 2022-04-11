@@ -1,0 +1,72 @@
+<h2 class="page-title">Book Hotel</h2>
+<div *ngIf="!loading">
+  <div *ngIf="hotel">
+    <div class="main-card">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title
+            ><strong>Hotel Name:</strong> {{ hotel.hotel_name }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{ hotel.street }}, {{ hotel.city }} -
+            {{ hotel.postal_code }}
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p><strong>Price</strong></p>
+          <p>{{ hotel.price | currency: "CAD" }}</p>
+
+          <p><strong>Email</strong></p>
+          <p>{{ hotel.email }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Add New Booking</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" [formGroup]="bookingForm">
+      <mat-card-content>
+        <mat-form-field class="invisible example-full-width">
+          <input matInput type="text" formControlName="hotelId"  />
+        </mat-form-field>
+        <mat-form-field class="invisible example-full-width">
+          <input matInput type="text" formControlName="userId" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Start Date"
+            type="date"
+            formControlName="startDate"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="End Date"
+            type="date"
+            formControlName="endDate"
+          />
+        </mat-form-field>
+      </mat-card-content>
+      <button
+        mat-stroked-button
+        color="black"
+        class="btn-block"
+        type="submit"
+        (click)="submit($event)"
+      >
+        Add New Booking
+      </button>
+    </form>
+  </mat-card>
+</div>

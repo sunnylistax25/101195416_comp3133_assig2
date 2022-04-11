@@ -1,0 +1,73 @@
+<p>Hotels List</p>
+
+<div *ngIf="!loading" class="hotel-table">
+  <mat-form-field class="filter-field">
+    <mat-label>Filter</mat-label>
+    <input style="color: aliceblue;"
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Filter by any value"
+      #input
+    />
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Hotel Name Column -->
+    <ng-container matColumnDef="hotel_name">
+      <th mat-header-cell *matHeaderCellDef>Hotel Name</th>
+      <td class="hotel-name" (click)="navigate(element.id)" mat-cell *matCellDef="let element">
+          {{ element.hotel_name }}
+      </td>
+    </ng-container>
+
+    <!-- Street Column -->
+    <ng-container matColumnDef="street">
+      <th mat-header-cell *matHeaderCellDef>Street</th>
+      <td class="table-rows" mat-cell *matCellDef="let element">
+        {{ element.street }}
+      </td>
+    </ng-container>
+
+    <!-- City Column -->
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef>City</th>
+      <td class="table-rows" mat-cell *matCellDef="let element">
+        {{ element.city }}
+      </td>
+    </ng-container>
+
+    <!-- Postal Code Column -->
+    <ng-container matColumnDef="postal_code">
+      <th mat-header-cell *matHeaderCellDef>Postal Code</th>
+      <td class="table-rows" mat-cell *matCellDef="let element">
+        {{ element.postal_code }}
+      </td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td class="table-rows" mat-cell *matCellDef="let element">
+        {{ element.price | currency: 'CAD' }}
+      </td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td class="table-rows" mat-cell *matCellDef="let element">
+        {{ element.email }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+</div>
